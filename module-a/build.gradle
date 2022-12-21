@@ -1,0 +1,98 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+    //id 'java-test-fixtures'
+}
+
+description = 'module-a'
+
+group 'be.cocom.dms'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+/*
+def test(Project project) {
+    dependencies.create(project) {
+        capabilities { requireCapability("$project.group:$project.name-test") }
+    }
+}
+*/
+
+/*
+def fixture = sourceSets.getByName("test")
+java.registerFeature(fixture.name) {
+    usingSourceSet(fixture)
+}
+*/
+
+def tests = sourceSets.getByName("test")
+java.registerFeature(tests.name) {
+    usingSourceSet(tests)
+}
+/*configurations {
+    testArtifacts.extendsFrom testCompile
+}
+task testsJar(type: Jar, dependsOn: testClasses) {
+    archiveClassifier = 'test'
+    from sourceSets.test.allSource
+}
+artifacts {
+    testArtifacts testsJar
+}*/
+
+dependencies {
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    /*testImplementation("${project.group}:module-a:${project.version}")
+    testImplementation("${project.group}:module-a:${project.version}") {
+        capabilities {requireCapability(project.group + ':module-a:' + project.version + '-fixture')}
+    }*/
+    // /workspace/testJar/module-a/src/test/java/be/cocom/dms/packagea/ClassATest.java:10:
+    // error: cannot find symbol
+    //        String myClassBVariable = TestConstant.oneStaticSource;
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task testsJar(type: Jar, dependsOn: testClasses) {
+    archiveClassifier = 'tests'
+    from sourceSets.test.allSource
+}
+
+def artifactsList = []
+artifactsList = [jar, testJar]
+
+artifacts {
+    archives artifactsList
+}
+/*
+
+def json = sourceSets.getByName("test")
+tasks.register<jar>(json.jarTaskName) {
+
+
+}*/
+
+
+/*tasks.getByName("assemble").dependsOn("testJar")
+
+tasks.register<Jar>("testJar") {
+     archiveFileName.set("module-a-$version.jar")
+     include("be/cocom/dms/")
+     from(project.getSourceSets("test").output)
+}*/
+
+/*
+tasks.register("copyDependencies", Sync) {
+    from(configurations.testClasspath)
+    into(layout.buildDirectory.dir("dependencies"))
+}
+*/

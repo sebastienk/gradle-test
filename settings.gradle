@@ -1,0 +1,5 @@
+rootProject.name = 'testJar'
+include 'module-a'
+include 'module-b'
+project(":module-a").projectDir = file('module-a')
+project(":module-b").projectDir = file('module-b')
