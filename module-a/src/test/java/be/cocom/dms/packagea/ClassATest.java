@@ -8,6 +8,6 @@ class ClassATest {
     @Test
     void letString() {
         String myClassBVariable = TestConstant.oneStaticSource;
-        Assertions.assertThat(myClassBVariable).isEqualTo("I'm an static source");
+        Assertions.assertThat(myClassBVariable).isEqualTo("I'm an static source from A");
     }
 }
