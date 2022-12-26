@@ -1,6 +1,6 @@
 package be.cocom.dms.packagea;
 
-public class TestConstant {
+public class TestConstantA {
 
     public static String oneStaticSource = "I'm an static source from A";
 }

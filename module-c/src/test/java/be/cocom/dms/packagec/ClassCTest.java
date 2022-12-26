@@ -1,18 +1,18 @@
-package be.cocom.dms.packageb;
+package be.cocom.dms.packagec;
 
-import be.cocom.dms.packagea.ClassA;
+import be.cocom.dms.packageb.TestConstantB;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class ClassBTest {
+class ClassCTest {
 
     private String myClassBVariable;
 
-    private ClassA classA;
+    private ClassC classC;
 
     @Test
     void testAccessToClassATestClass() {
-        myClassBVariable = TestConstantB.oneStaticSource;
+        myClassBVariable = TestConstantB.oneStaticSourceFromA;
         Assertions.assertThat(myClassBVariable).isEqualTo("I'm an static source from A");
     }
 
