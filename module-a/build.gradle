@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'java-library'
-    id 'java-test-fixtures'
     id 'maven-publish'
 }
 
@@ -30,7 +29,7 @@ test {
 }
 
 task testsJar(type: Jar, dependsOn: testClasses) {
-    archiveClassifier = 'tests'
+    archiveClassifier = 'test'
     from sourceSets.test.allSource
 }
 

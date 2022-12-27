@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'java-library'
-    id 'java-test-fixtures'
     id 'maven-publish'
 }
 
@@ -18,9 +17,13 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
-    testImplementation(':module-a')
-    testFixturesImplementation(':module-a')
-    testImplementation(testFixtures(project(":module-a")))
+    testImplementation(project(":module-a"))
+    testImplementation(project(":module-a")) {
+        capabilities {
+            requireCapability("be.cocom.dms:module-a-test")
+        }
+    }
+
 
 }
 
