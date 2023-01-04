@@ -5,7 +5,6 @@ plugins {
 }
 
 group 'be.cocom.dms'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
