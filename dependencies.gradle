@@ -1,0 +1,8 @@
+def dependencyGroup(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+ext.modulo = dependencyGroup {
+    implementation "be.cocom.dms:module-a:$project.version"
+}

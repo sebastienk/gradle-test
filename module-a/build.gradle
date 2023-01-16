@@ -28,8 +28,8 @@ test {
     useJUnitPlatform()
 }
 
-task testsJar(type: Jar, dependsOn: testClasses) {
-    archiveClassifier = 'test'
+tasks.register('testsJar') {
+    getArchiveClassifier().set('test')
     from sourceSets.test.allSource
 }
 
@@ -38,4 +38,12 @@ artifactsList = [jar, testJar]
 
 artifacts {
     archives artifactsList
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
 }
