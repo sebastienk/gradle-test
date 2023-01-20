@@ -1,7 +1,6 @@
 plugins {
     id 'java-library'
     id 'java-test-fixtures'
-    id 'maven-publish'
 }
 
 group 'be.cocom.dms'
@@ -13,21 +12,20 @@ repositories {
 }
 
 dependencies {
+    testImplementation(project(":module-a"))
+    testImplementation(testFixtures("be.cocom.dms:module-a"))
+
     testImplementation 'org.assertj:assertj-core:3.23.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
-    testImplementation(project(":module-a"))
-    testImplementation(testFixtures("be.cocom.dms:module-a"))
     testFixturesImplementation(project(":module-a"))
     testFixturesApi(project(":module-a"))
 
     testFixturesApi(("be.cocom.dms:module-a"))
     testFixturesImplementation(testFixtures('be.cocom.dms:module-a'))
-    testFixturesImplementation(testFixtures('be.cocom.dms:module-a:testFixtures'))
 }
 
 test {
     useJUnitPlatform()
 }
-

@@ -1,7 +1,6 @@
 plugins {
     id 'java-library'
     id 'java-test-fixtures'
-    id 'maven-publish'
 }
 
 description = 'module-a'
@@ -13,11 +12,6 @@ repositories {
     mavenLocal()
 }
 
-def tests = sourceSets.getByName("test")
-java.registerFeature(tests.name) {
-    usingSourceSet(tests)
-}
-
 dependencies {
     testImplementation 'org.assertj:assertj-core:3.23.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
@@ -26,16 +20,4 @@ dependencies {
 
 test {
     useJUnitPlatform()
-}
-
-task testsJar(type: Jar, dependsOn: testClasses) {
-    archiveClassifier = 'tests'
-    from sourceSets.test.allSource
-}
-
-def artifactsList = []
-artifactsList = [jar, testJar]
-
-artifacts {
-    archives artifactsList
 }
