@@ -25,7 +25,6 @@ dependencies {
     testFixturesApi(("be.cocom.dms:module-a"))
     testFixturesImplementation(testFixtures('be.cocom.dms:module-a'))
     testFixturesImplementation(testFixtures('be.cocom.dms:module-a:testFixtures'))
-
 }
 
 test {
