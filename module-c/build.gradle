@@ -1,11 +1,9 @@
 plugins {
-    id 'groovy'
     id 'java'
     id 'java-library'
     id 'maven-publish'
 }
-
-description = 'module-a'
+apply from: "$rootProject.projectDir/dependencies.gradle"
 
 group 'be.cocom.dms'
 
@@ -14,15 +12,24 @@ repositories {
     mavenLocal()
 }
 
-def tests = sourceSets.getByName("test")
-java.registerFeature(tests.name) {
-    usingSourceSet(tests)
-}
-
 dependencies {
+    implementation project(':module-a')
+    implementation project(':module-b')
+    testImplementation project(':module-b')
+
     testImplementation 'org.assertj:assertj-core:3.23.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation(project(":module-a")) {
+        capabilities {
+            requireCapability("be.cocom.dms:module-a-test")
+        }
+    }
+    testImplementation(project(":module-b")) {
+        capabilities {
+            requireCapability("be.cocom.dms:module-b-test")
+        }
+    }
 }
 
 test {
